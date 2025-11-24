@@ -1,0 +1,10 @@
+<div class="flex justify-start mt-8">
+  <div class="w-80">
+    <h2 class="ml-8">Tasks by Priority</h2>
+    <%= pie_chart @tasks.group(:priority).count %>
+  </div>
+  <div class="w-200">
+    <h2 class="ml-8">Tasks by Due Date</h2>
+    <%= line_chart @tasks.group_by_day(:due_date).count %>
+  </div>
+</div>

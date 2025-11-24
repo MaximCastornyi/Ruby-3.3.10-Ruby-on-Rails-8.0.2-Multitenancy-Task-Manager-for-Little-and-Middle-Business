@@ -1,0 +1,37 @@
+<div class="text-gray-300 p-2 w-full">
+  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "text-gray-600 m-8" %>
+  <div class="w-full">
+    <table class="bg-[#1c255c] rounded-md w-full">
+      <thead>
+        <tr class="text-left uppercase border-b border-gray-500">
+          <th class="px-4 py-3">
+            Name
+          </th>
+          <th class="px-4 py-3">
+            Owner
+          </th>
+          <th class="px-4 py-3">
+            Subscribed?
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @organizations.each do |organization| %>
+          <tr class="text-xl text-left capitalize hover:bg-[#5f0a63] rounded-md capitalize">
+            <td class="px-4 py-3"><%= organization.name %></td>
+            <td class="px-4 py-3"><%= organization.owner&.full_name %></td>
+            <td class="px-6 py-3"><%= organization.owner&.payment_processor.subscribed? %></td>
+            <td class="py-3">
+              <div class=" justify-items-center grid">
+                <%= button_to impersonate_admin_dashboard_path(organization.owner), data: {turbo: false} do %>
+                  <div class=" justify-items-center grid ">
+                    <%= inline_svg_tag("view.svg") %>view</div>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

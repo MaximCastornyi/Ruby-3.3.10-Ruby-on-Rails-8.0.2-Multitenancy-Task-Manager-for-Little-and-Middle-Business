@@ -1,0 +1,10 @@
+<div data-toggle-target="profileCard" class="hidden bg-[#ab3c71] m-12 size-30 p-5 absolute right-0 rounded-md font-semibold capitalize">
+    <ul>
+        <li class="mb-4">
+            <%= link_to "Profile", edit_user_registration_path %>
+        </li>
+        <li>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "cursor-pointer" %>
+        </li>
+    </ul>
+</div>

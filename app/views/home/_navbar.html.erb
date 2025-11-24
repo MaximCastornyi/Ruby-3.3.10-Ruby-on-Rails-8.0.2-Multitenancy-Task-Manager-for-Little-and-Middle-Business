@@ -1,0 +1,26 @@
+  <nav class="flex justify-between mb-8">
+  <h1 class="grid place-items-start">
+    <a href="/" class="text-4xl">
+        
+<span class="float-left" style="color:white;background:red;font-family:Arial;font-weight:bold;font-size:40px">Nets</span>
+<span style="color:red;background:white;font-family:Arial;font-weight:bold;font-size:40px">Devs</span>
+    </a>
+  </h1>
+  <% unless user_signed_in? %>
+    <div class="flex gap-6">
+      <a href="/users/sign_in" class="bg-orange-600 p-2 rounded-md capitalize font-bold text-gray-200 hover:bg-orange-400 flex justify-center text-xl">Log in         
+        <span>
+          <%= image_tag("icons8-next-page-50.png", class: "size-5 ml-2 mt-1") %>
+        </span></a>
+      <a href="/users/sign_up" class="bg-gray-800 p-2 rounded-md capitalize font-bold text-gray-200 hover:bg-gray-600 text-xl">Sign up</a>
+    </div>
+  <% else %>
+    <div class="flex gap-6">
+      <a href="/users/sign_out" data-turbo-method="delete" class="bg-orange-600 p-2 rounded-md capitalize font-bold text-gray-200 hover:bg-orange-400 flex justify-center text-xl">Log out         
+        <span>
+          <%= image_tag("icons8-next-page-50.png", class: "size-5 ml-2 mt-1") %>
+        </span></a>
+      <a href="/dashboard" class="bg-gray-800 p-2 rounded-md capitalize font-bold text-gray-200 hover:bg-gray-600 text-xl">Dashboard</a>
+    </div>
+  <% end %>
+</nav>

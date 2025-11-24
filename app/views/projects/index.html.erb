@@ -1,0 +1,65 @@
+<% @projects.each do |project| %>
+  <%= turbo_stream_from project %>
+<% end %>
+<div class="text-gray-300 p-2 w-full">
+  <%= render "add_project_form"  %>
+  <div class="w-full">
+    <table class="bg-[#1c255c] rounded-md w-full">
+      <thead>
+        <tr class="text-left uppercase border-b border-gray-500">
+          <th class="px-4 py-3">
+            Name
+          </th>
+          <th class="px-4 py-3">
+            Team
+          </th>
+          <th class="px-4 py-3">
+            Status
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr class="text-xl text-left capitalize hover:bg-[#5f0a63] rounded-md capitalize">
+            <td class="px-4 py-3"><%= project.name %></td>
+            <td class="px-4 py-3"><%= project.team&.name %></td>
+            <td class="px-6 py-3"><%= project.tasks.completed.size %> / <%= project.tasks.size %></td>
+            <td class="py-3">
+              <%= link_to edit_project_path(project), data: {turbo: true, turbo_frame: :modal} do %>
+                <div class=" justify-items-center grid mr-4">
+                  <%= inline_svg_tag("edit.svg") %>edit
+                </div>
+              <% end %>
+            </td>
+            <td class="py-3">
+              <div class=" justify-items-center grid">
+                <%= link_to project_path(project) do %>
+                  <div class=" justify-items-center grid ">
+                    <%= inline_svg_tag("view.svg") %>view</div>
+                </div>
+              <% end %>
+            </td>
+            <td class="py-3">
+              <div class=" justify-items-center grid">
+                <%= button_to project_path(project), class: " justify-items-center grid cursor-pointer", method: :delete, data:{turbo_confirm:("Are You Shure?")} do %>
+                  <%= inline_svg_tag("delete.svg") %>
+                  Delete
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="p-4">
+      <%== pagy_nav(@pagy) %>
+    </div>
+    <% if limit_reached? %>
+    <div class="text-gray-500">
+      <p>Projects limit reached
+        <%= link_to "Upgrade Here", subscriptions_path, class: " bg-[#8a0e5c] p-1 cursor-pointer rounded-md hover:bg-[#ab3c71] text-white capitalize md:lowercase" %>
+      </p>
+    </div>
+    <% end %>
+  </div>
+</div>

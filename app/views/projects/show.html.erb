@@ -1,0 +1,14 @@
+<%= turbo_stream_from @project %>
+<div class="w-full p-3 text-gray-600">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-3xl"><%= @project.name %></h1>
+        <%= render "tasks/search_form", class: "" %>
+    <%= link_to "New task", new_project_task_path(@project), class: "text-xl text-gray-50 bg-[#8a0e5c] p-2 cursor-pointer rounded-md hover:bg-[#ab3c71]", data: {turbo: true, turbo_frame: :modal} %>
+  </div>
+  <div class="flex  justify-normal">
+    <progress class="rounded-lg mt-2 mr-50" style="height:10px;width:30%" value="<%= @project.tasks.completed.size %>" max="<%= @project.tasks.size %>">
+    </progress>
+
+  </div>
+  <%= render "tasks/task" %>
+</div>

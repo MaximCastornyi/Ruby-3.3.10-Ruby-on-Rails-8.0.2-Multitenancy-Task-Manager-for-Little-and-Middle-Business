@@ -1,0 +1,31 @@
+<%= turbo_frame_tag :modal do %>
+  <div class="relative">
+    <div class="fixed inset-0 bg-gray-500 opacity-75"></div>
+    <div class="fixed inset-0 mt-8 p-8 bg-gray-500 size-96 h-50 mx-auto rounded-md overflow-y-auto">
+      <% if @projects.present? %>
+        <% @projects.each do |project| %>
+          <div clas="p-2">
+            <ul>
+              <li class="text-gray-200 hover:bg-[#5f0a63]">
+                <%= link_to project.name, project_path(project), data: {turbo_frame: "_top"} %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      <% else %>
+        <div clas="p-2">
+          <ul>
+            <li class="text-gray-200 hover:bg-[#5f0a63]">
+              No results
+            </li>
+          </ul>
+        </div>
+      <% end %>
+      <div class="absolute right-2 bottom-2">
+        <%= link_to 'javascript:history.back()' do %>
+          <%= inline_svg_tag("close.svg", class: "text-gray-200 hover:text-gray-100 cursor-pointer") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

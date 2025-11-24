@@ -1,0 +1,6 @@
+<div class="max-w-sm">
+    <%= form_with model: Project.new do |form| %>
+          <%= form.text_field :name, placeholder: "enter project name", class: "rounded-md bg-white h-10 p-3 text-[#5e6166] m-4" %>
+          <%= form.submit "Create", class: " text-xl bg-[#8a0e5c] p-1 cursor-pointer rounded-md hover:bg-[#ab3c71]" %>
+    <% end %>
+</div>

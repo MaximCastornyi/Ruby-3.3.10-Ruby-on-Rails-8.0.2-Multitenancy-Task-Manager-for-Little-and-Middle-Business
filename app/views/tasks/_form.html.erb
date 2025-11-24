@@ -1,0 +1,49 @@
+<%= turbo_frame_tag :modal do %>
+  <div class="relative">
+    <div class="fixed inset-0 bg-gray-500 opacity-75"></div>
+    <div class="fixed inset-0 mt-8 p-8 bg-gray-500 w-110 h-fit mx-150 rounded-md">
+      <%= form_with(model: [project, task], class: "contents") do |form| %>
+        <% if task.errors.any? %>
+          <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+            <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+            <ul class="list-disc ml-6">
+              <% task.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="my-5 hover:bg-[#5f0a63]">
+          <%= form.label :name, class: "text-gray-50 p-2" %>
+          <%= form.text_field :name, class: ["ml-17 rounded-md bg-white h-10 p-3 text-[#8a0e5c] m-4", {"ml-17 rounded-md bg-white h-10 p-3 text-[#5e6166] m-4": task.errors[:name].none?, "border-red-400 focus:outline-red-600": task.errors[:name].any?}] %>
+        </div>
+        <div class="my-5 hover:bg-[#5f0a63]">
+          <%= form.label :due_date, class: "text-gray-50 p-2" %>
+          <%= form.date_field :due_date, class: ["ml-11 rounded-md bg-white h-10 p-3 text-[#8a0e5c] m-4", {"ml-11 rounded-md bg-white h-10 p-3 text-[#8a0e5c] m-4": task.errors[:due_date].none?, "border-red-400 focus:outline-red-600": task.errors[:due_date].any?}] %>
+        </div>
+        <div class="my-5 hover:bg-[#5f0a63] grid grid-cols-2 place-content-end gap-2">
+          <%= form.label :priority, class: "text-gray-50 p-2" %>
+          <div class="bg-white h-6 mt-2 w-20 left-41 absolute rounded-md">
+            <%= form.select :priority, Task.priorities.keys, class: ["bg-white block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"bg-white border-gray-400 focus:outline-blue-600 rounded-md": task.errors[:priority].none?, "border-red-400 focus:outline-red-600": task.errors[:priority].any?}] %>
+          </div>
+        </div>
+        <% if current_user.organization_owner? || current_user.has_role?(:team_leader) %>
+        <div class="my-5 hover:bg-[#5f0a63] grid grid-cols-2 place-content-end gap-2">
+          <%= form.label :assign_to, class: "text-gray-50 p-2" %>
+          <div class="bg-white h-6 mt-2 w-40 left-41 absolute rounded-md">
+            <%= form.collection_select :assignee_id, @users, :id, :email, include_blank: true, class: ["w-50 bg-white block shadow-sm rounded-md border px-6 py-2 mt-2", {"bg-white border-gray-400 focus:outline-blue-600 rounded-md": task.errors[:priority].none?, "border-red-400 focus:outline-red-600": task.errors[:priority].any?}] %>
+          </div>
+        </div>
+        <% end %>
+        <div class="inline">
+          <%= form.submit class: "text-gray-50 bg-[#8a0e5c] p-2 cursor-pointer rounded-md hover:bg-[#ab3c71]  text-xl", data: {turbo_frame: "_top"} %>
+        </div>
+        <div class="absolute right-2 bottom-2">
+          <%= link_to project_path(project) do %>
+            <%= inline_svg_tag("close.svg", class: "text-gray-200 hover:text-gray-100 cursor-pointer") %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

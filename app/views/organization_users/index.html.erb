@@ -1,0 +1,35 @@
+<div class="text-gray-300 p-2 w-full">
+  <div class="mx-auto m-6">
+    <%= link_to "Invite User", new_user_invitation_path, class: " text-xl text-gray-50 bg-[#8a0e5c] p-2 cursor-pointer rounded-md hover:bg-[#ab3c71]" %>
+  </div>
+  <div class="w-full">
+    <table class="bg-[#1c255c] rounded-md w-full">
+      <thead>
+        <tr class="text-left uppercase border-b border-gray-500">
+          <th class="px-30 py-3">
+            Email
+          </th>
+          <th class="px-5 py-3">
+            Roles
+          </th>
+          <th class="px-8 py-3">
+            Change roles
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr class="text-xl text-left hover:bg-[#5f0a63] rounded-md">
+            <td class="px-25 py-3"><%= user.email %></td>
+            <td class="px-4 capitalize pr-30"><%= user.roles.pluck(:name).join(" , ") %></td>
+            <td class="px-6 capitalize pr-20">
+              <%= form_with url: change_role_organization_user_path(user) do |form|  %>
+                 <%= form.select :role, User::ROLES, {prompt: "select role"}, class: "bg-white rounded-md text-gray-600", onchange: "this.form.requestSubmit()" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

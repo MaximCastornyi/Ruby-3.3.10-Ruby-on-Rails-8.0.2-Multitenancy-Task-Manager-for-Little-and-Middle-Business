@@ -1,0 +1,10 @@
+<div class="ml-8 mt-6 text-gray-700 text-xl">
+  <%= calendar(number_of_days: 28, events: @tasks, attribute: :due_date) do |date,tasks| %>
+    <%= date %>
+    <% tasks.each do |task| %>
+    <div class="p1 border border-indigo-600 border-dashed">
+    <%= link_to task.name, project_path(task.project) %>
+    </div>
+    <% end %>
+  <% end %>
+</div>

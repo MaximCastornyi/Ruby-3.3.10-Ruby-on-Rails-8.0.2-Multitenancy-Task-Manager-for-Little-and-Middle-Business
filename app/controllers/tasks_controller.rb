@@ -1,0 +1,87 @@
+class TasksController < ApplicationController
+  layout "admin"
+  before_action :authenticate_user!
+  before_action :authenticate_owner_or_team_leader!, only: %i[ create destroy ]
+  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_project
+  before_action :set_users
+
+  # GET /tasks or /tasks.json
+  def index
+    @tasks = Task.all
+  end
+
+  # GET /tasks/1 or /tasks/1.json
+  def show
+  end
+
+  # GET /tasks/new
+  def new
+    @task = @project.tasks.build
+  end
+
+  # GET /tasks/1/edit
+  def edit
+  end
+
+  # POST /tasks or /tasks.json
+  def create
+    @task = @project.tasks.build(task_params)
+
+    respond_to do |format|
+      if @task.save
+        UrgentTaskNotifier.with(record: @task).deliver(current_user)
+        format.html { redirect_to project_url(@project), notice: "Task was successfully created" }
+      else
+        format.html { redirect_to project_url(@project), alert: @task.errors.full_messages.join(",") }
+      end
+    end
+  end
+
+  # PATCH/PUT /tasks/1 or /tasks/1.json
+  def update
+    respond_to do |format|
+      if @task.update(task_params)
+        format.html { redirect_to project_url(@project), notice: "Task was successfully updated", status: :see_other }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /tasks/1 or /tasks/1.json
+  def destroy
+    @task.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to project_url(@project), notice: "Task was successfully destroyed", status: :see_other }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_task
+      @task = Task.find(params.expect(:id))
+    end
+
+    def set_project
+      @project = Project.find(params.expect(:project_id))
+    end
+
+    def set_users
+      @project = Project.find(params.expect(:project_id))
+      if current_tenant.owner.payment_processor.subscribed?
+        @users = @project&.team&.users || [ current_user ]
+      else
+        @users = [ current_user ]
+      end
+    end
+
+    # Only allow a list of trusted parameters through.
+    def task_params
+      params.require(:task).permit(:name, :due_date, :completed, :completed_at, :priority, :project_id, :assignee_id)
+    end
+end

@@ -1,0 +1,29 @@
+  <nav class="bg-[#a60a29] px-6 text-gray-100 flex items-center justify-between h-20 text-xl">
+  <div>
+    <button data-action="click->toggle#toggleSidebar">
+      <%= inline_svg_tag("hamburger.svg") %>
+    </button>
+  </div>
+  <%= form_with url:search_path, method: :get, data: {controller: "search"} do |form| %>
+  <div class="flex items-center relative">
+    <%= form.text_field :name, class: "rounded-md bg-gray-200 h-10 p-3 text-[#5e6166]", placeholder: "search for projects", data: { search_target: "input", action: "input->search#debounce" } %>
+    <button type="submit" class="absolute right-2 fill-gray-400 cursor-pointer">
+      <%= inline_svg_tag("search.svg") %>
+    </button>
+  </div>
+  <% end %>
+  <div class="justify-items-center grid cursor-pointer"  data-action="click->toggle#toggleNotificationCard">
+    
+    <%= inline_svg_tag("notification.svg") %>
+    <%= render "dashboard/notification_card" %>
+    Notifications
+    <% if current_user.notifications.unread.any? %>
+    <span class="absolute inline-flex animate-ping rounded-full bg-sky-400 opacity-75 size-10"></span>
+    <% end %>
+  </div>
+  <div data-action="click->toggle#toggleProfileCard" class="justify-items-center grid relative cursor-pointer px-2">
+    <%= inline_svg_tag("user.svg") %>
+    User
+    <%= render "dashboard/profile_card", class: "ml-8" %>
+  </div>
+</nav>

@@ -1,0 +1,28 @@
+<div class="px-6 py-4 bg-gray-200 h-screen">
+  <%= render "navbar" %>
+  <main class="grid md:flex items-center justify-around-relative">
+    <section class="md:basis-1/2">
+      <div class="w-1/2 flex justify-between absolute top-10 z-0">
+        <%= image_tag("71845703_9723549.png", class: "p-2") %>
+      </div>
+      <h2 class="font-bold text-4xl capitalize mb-4 z-40" style="
+    background-image: linear-gradient(#d30beb, #e53232);
+    color: transparent;
+    background-clip: text;
+  ">
+        A task manager makes sure a project gets done-on time. 
+      </h2>
+      <p class="mb-8 text-2xl text-gray-600">
+        A Task Manager is a software or feature found in operating systems such as Windows, macOS, and Linux, as well as in some mobile operating systems like Android and iOS. 
+      </p>
+      <a href="/dashboard" class=" bg-orange-600 p-4 text-gray-200 text-4xl rounded-[20] hover:text-gray-600 flex capitalize justify-center">Get Started 
+        <span>
+          <%= image_tag("icons8-arrow-right-64.png", class: "size-12") %>
+        </span>
+      </a>
+    </section>
+    <div class="md:basis-1/2">
+      <%= image_tag("25469811_developer_male.png", class: "mt-4") %>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,50 @@
+<aside data-toggle-target="sidebar" class="text-xl bg-[#592528] min-w-45 h-[calc(100vh-81px)] capitalize text-[#FFFFFF]">
+  <ul class="ml-6 py-6">
+    <li class="py-4">
+      <a href="/" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+        Home
+      </a>
+    </li>
+    <li class="py-4">
+      <a href="/dashboard" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+        Dashboard
+      </a>
+    </li>
+    <li class="py-4">
+      <a href="/projects" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+        Projects
+      </a>
+    </li>
+    <li class="py-4">
+      <a href="/calendar" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+        Calendar
+      </a>
+      <span class="text-xs text-orange-300 no-underline normal-case">enterprise</span>
+    </li>
+    <% if current_user.organization_owner? %>
+      <li class="py-4">
+        <a href="/organization_users" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+          Users
+        </a>
+        <span class="text-xs text-orange-300 no-underline normal-case">pro</span>
+      </li>
+    <% end %>
+    <li class="py-4">
+      <a href="/teams" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+        Teams
+      </a>
+      <span class="text-xs text-orange-300 no-underline normal-case">pro</span>
+    </li>
+    <li class="py-4">
+      <% if current_user.payment_processor.subscribed? %>
+        <a href="/billing" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+          Upgrade Plan
+        </a>
+      <% else %>
+        <a href="/subscriptions" class="underline decoration-[#0dd113] hover:decoration-[#f739d8]  decoration-4">
+          Plans
+        </a>
+      <% end %>
+    </li>
+  </ul>
+</aside>

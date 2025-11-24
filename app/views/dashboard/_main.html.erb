@@ -1,0 +1,35 @@
+<main class="text-gray-500 p-3 mx-auto text-xl">
+  <p class="mb-6 text-xs">
+    <% if current_user != true_user %>
+      You (<%= true_user.email %>) are signed in as <%= current_user.email %>
+      <%= button_to "Back to admin", stop_impersonating_admin_dashboard_index_path, data: {turbo: false} %>
+    <% end %>
+  </p>
+  <div class="flex gap-6 flex-wrap justify-center">
+    <div class="p-4 rounded-lg bg-gray-300 h-24 min-w-40 text-center">
+      <p class="capitalize mb-3">Total Projects</p>
+      <p class="font-bold bg-gray-500 rounded-md text-white"><%= @projects.size %></p>
+    </div>
+    <div class="p-4 rounded-lg bg-gray-300 h-24 min-w-40 text-center">
+      <p class="capitalize mb-3">Total Tasks</p>
+      <p class="font-bold bg-gray-500 rounded-md text-white"><%= @tasks.size %></p>
+    </div>
+    <div class="p-4 rounded-lg bg-gray-300 h-24 min-w-40 text-center">
+      <p class="capitalize mb-3">Urgent Tasks</p>
+      <p class="font-bold bg-gray-500 rounded-md text-white"><%= @tasks.urgent.size %></p>
+    </div>
+    <div class="p-4 rounded-lg bg-gray-300 h-24 min-w-40 text-center">
+      <p class="capitalize mb-3">Completed Tasks</p>
+      <p class="font-bold bg-gray-500 rounded-md text-white"><%= @tasks.completed.size %></p>
+    </div>
+    <div class="p-4 rounded-lg bg-gray-300 h-24 min-w-40 text-center">
+      <p class="capitalize mb-3">Expired Tasks</p>
+      <p class="font-bold bg-gray-500 rounded-md text-white"><%= @tasks.expired.size %></p>
+    </div>
+    <div class="p-4 rounded-lg bg-gray-300 h-24 min-w-40 text-center">
+      <p class="capitalize mb-3">Pending Tasks</p>
+      <p class="font-bold bg-gray-500 rounded-md text-white"><%= @tasks.pending.size %></p>
+    </div>
+  </div>
+  <%= render "charts" %>
+</main>

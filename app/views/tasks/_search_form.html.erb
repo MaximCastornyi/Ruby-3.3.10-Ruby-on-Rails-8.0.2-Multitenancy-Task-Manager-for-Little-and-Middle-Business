@@ -1,0 +1,16 @@
+<div class="flex jystify-between mt-2">
+  <%= search_form_for @q, url: project_path(@project) do |f| %>
+    <%= f.search_field :name_cont, class: "text-xl rounded-md bg-white h-10 p-3 text-[#5e6166]", placeholder: "search for task" %>
+    <button type="submit" class="absolute ml-2 mt-2 fill-gray-400 cursor-pointer">
+      <%= inline_svg_tag("search.svg") %>
+    </button>
+  <% end %>
+  <div class="ml-25 mt-2">
+    <%= link_to "Clear", project_path(@project), class: "text-xl font-bold hover:text-[#5f0a63]" %>
+  </div>
+  <%= search_form_for @q, url: project_path(@project) do |f| %>
+    <div class="flex bg-white h-7 mt-2 w-23 rounded-md ml-20 text-xl">
+        <%= f.select :priority_eq, Task.priorities, {}, {class: "text-xl rounded-md", onchange: "this.form.requestSubmit()"} %>
+    </div>
+  <% end %>
+</div>
