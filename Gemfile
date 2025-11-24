@@ -89,5 +89,5 @@ gem "devise_invitable", "~> 2.0", ">= 2.0.11"
 gem "pay", "~> 11.1"
 
 # To use Stripe, also include:
-gem "stripe", "~> 15.3" # VISUAL="code --wait" bin/rails credentials:edit
+gem "stripe", "~> 18.0" # VISUAL="code --wait" bin/rails credentials:edit
 gem "pretender", "~> 0.6.0"
