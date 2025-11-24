@@ -75,7 +75,7 @@ gem "tailwindcss-ruby", "~> 4.1", ">= 4.1.12"
 
 gem "devise", "~> 4.9"
 
-gem "noticed", "~> 2.8"
+gem "noticed", "~> 2.9"
 
 gem "good_job", "~> 4.11"
 
