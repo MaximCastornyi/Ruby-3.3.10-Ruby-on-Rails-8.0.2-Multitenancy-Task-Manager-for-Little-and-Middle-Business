@@ -71,7 +71,7 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 4.3"
-gem "tailwindcss-ruby", "~> 4.1", ">= 4.1.12"
+gem "tailwindcss-ruby", "~> 4.1"
 
 gem "devise", "~> 4.9"
 
