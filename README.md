@@ -1,7 +1,7 @@
 # Ruby-3.3.10-Ruby-on-Rails-8.0.2-Multitenancy-Task-Manager-for-Little-and-Middle-Business
 
 Multitenancy Task Manager for Little and Middle Business with using PostgreSQL, Tailwind, Redis, Stripe and gems: pagy, ransack, rolify, chartkick and other. Before you start using the application, please follow these steps:
-1)Before launching the project, you need to install Redis and run it:
+1) Before launching the project, you need to install Redis and run it:
 ```bash
 $sudo service redis-server start
 ```
