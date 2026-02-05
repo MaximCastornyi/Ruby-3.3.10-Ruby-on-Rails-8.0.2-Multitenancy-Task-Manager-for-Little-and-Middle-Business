@@ -77,7 +77,7 @@ gem "devise", "~> 4.9"
 
 gem "noticed", "~> 2.8"
 
-gem "good_job", "~> 4.11"
+gem "good_job", "~> 4.12"
 
 gem "chartkick", "~> 5.2"
 gem "groupdate", "~> 6.7"
